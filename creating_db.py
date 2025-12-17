@@ -16,14 +16,14 @@ cursor.execute("""
                """)
 
 student_list = [
-    ("Bob Jones", "607-456-1084", "25347 10th st Johnson Texas 34528", "Andrew Jones", "Sally Jones", "Chemistry, Economics", "23")
+    ("Bob Jones", "607-456-1084", "25347 10th st Johnson Texas 34528", "Andrew Jones", "Sally Jones", "Chemistry, Economics", 23)
 ]
 
 cursor.executemany("insert into info values(?,?,?,?,?,?,?)", student_list)
 
 conn.commit()
 
-for row in cursor.execute("Select * from info"):
+for row in cursor.execute("Select * FROM info"):
     print (row)
 
 conn.close()

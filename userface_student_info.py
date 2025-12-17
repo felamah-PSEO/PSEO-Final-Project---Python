@@ -59,25 +59,32 @@ class student_info:
 
     #Function to read student info 
     def read_student_info(self):
-        #Clear previous content
+        # Clear previous content
         for widget in self.scrollable_frame.winfo_children():
             widget.destroy()
 
-        #Connecting to DB 
+        # Connecting to DB
         conn = sqlite3.connect("student_info.db")
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM info")
         rows = cursor.fetchall()
         conn.close()
 
+        field_names = ["Name", "Number", "Address", "Father", "Mother", "Classes", "Age"]
+
         #Displaying all information in a label
         for row in rows:
-            s_info = (
-                f"Name: {row[0]}, Number: {row[1]}, Address: {row[2]}, "
-                f"Father: {row[3]}, Mother: {row[4]}, Classes: {row[5]}, Age: {row[6]}"
-            )
-            label1 = tk.Label(self.scrollable_frame, text=s_info, anchor="w", justify="left")
-            label1.pack(fill="x", pady=2)
+            # Creates a "card" for each student
+            card = tk.Frame(self.scrollable_frame, bd = 2, relief = "groove", bg = "#fdfdfd", pady = 10, padx = 10)
+            card.pack(fill = "x", pady = 8, padx = 15)
+
+            # Puts the info on different lines
+            for i, label_text in enumerate(field_names):
+                # Bold Labels
+                tk.Label(card, text=f"{label_text}:", font=("Arial", 10, "bold"), bg="#fdfdfd", fg="#333").grid(row=i, column=0, sticky="w")
+
+                # Student Data
+                tk.Label(card, text=f"{row[i]}", font=("Arial", 10), bg="#fdfdfd", fg="black").grid(row=i, column=1, sticky="w", padx=10)
 
     #Function to add info
     def add_info(self):
@@ -104,17 +111,17 @@ class student_info:
         number_entry = tk.Entry(self.top_frame2)
         number_entry.pack()
 
-        address_label = tk.Label(self.top_frame2, text = "Student's address: ")
+        address_label = tk.Label(self.top_frame2, text = "Student's Address: ")
         address_label.pack()
         address_entry = tk.Entry(self.top_frame2)
         address_entry.pack()
 
-        dad_label = tk.Label(self.top_frame2, text = "Student's dad: ")
+        dad_label = tk.Label(self.top_frame2, text = "Student's Dad: ")
         dad_label.pack()
         dad_entry = tk.Entry(self.top_frame2)
         dad_entry.pack()
 
-        mom_label = tk.Label(self.top_frame2, text = "Student's mom: ")
+        mom_label = tk.Label(self.top_frame2, text = "Student's Mom: ")
         mom_label.pack()
         mom_entry = tk.Entry(self.top_frame2)
         mom_entry.pack()
