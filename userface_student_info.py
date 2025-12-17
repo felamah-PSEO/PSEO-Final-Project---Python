@@ -5,7 +5,7 @@ class student_info:
     def __init__(self):
         #Creating the main window
         self.main_window = tk.Tk()
-        self.main_window.geometry("1000x500")
+        self.main_window.geometry("850x500")
         self.main_window.title("Student Info")
 
         # Only the student info is inside this canvas
@@ -72,7 +72,7 @@ class student_info:
 
         field_names = ["Name", "Number", "Address", "Father", "Mother", "Classes", "Age"]
 
-        max_columns = 2
+        max_columns = 3
 
         # Displaying all information in a label
         for index, row in enumerate(rows):
