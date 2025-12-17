@@ -46,7 +46,7 @@ class student_info:
         self.button3 = tk.Button(self.middle_frame, text="Delete", command=self.delete_info)
         self.button3.pack(side="left", padx=5)
 
-        self.refresh_button = tk.Button(self.middle_frame, text="Refresh", command=self.read_student_info)
+        self.refresh_button = tk.Button(self.bottom_frame, text="Refresh", command=self.read_student_info)
         self.refresh_button.pack(side="left", padx=5)
 
         self.button4 = tk.Button(self.bottom_frame, text="Quit", command=self.main_window.destroy)
@@ -72,11 +72,16 @@ class student_info:
 
         field_names = ["Name", "Number", "Address", "Father", "Mother", "Classes", "Age"]
 
-        #Displaying all information in a label
-        for row in rows:
+        max_columns = 2
+
+        # Displaying all information in a label
+        for index, row in enumerate(rows):
+            grid_row = index // max_columns
+            grid_column = index % max_columns
+
             # Creates a "card" for each student
             card = tk.Frame(self.scrollable_frame, bd = 2, relief = "groove", bg = "#fdfdfd", pady = 10, padx = 10)
-            card.pack(fill = "x", pady = 8, padx = 15)
+            card.grid(row = grid_row, column = grid_column, sticky = "nsew", pady = 10, padx = 10)
 
             # Puts the info on different lines
             for i, label_text in enumerate(field_names):
