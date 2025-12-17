@@ -5,7 +5,7 @@ class student_info:
     def __init__(self):
         #Creating the main window
         self.main_window = tk.Tk()
-        self.main_window.geometry("850x500")
+        self.main_window.geometry("1025x500")
         self.main_window.title("Student Info")
 
         # Only the student info is inside this canvas
